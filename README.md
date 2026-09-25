@@ -21,9 +21,16 @@ ficha se rechaza**.
 
 ## Actualizar la política
 
-Editar `index.html`, **subir la `Effective Date`**, y:
+🚨 **Este `index.html` NO se edita aquí: se despliega.** La fuente es
+`senku/docs/privacy-policy.html`, en el repo del juego, y es la que sus tests cruzan con los
+autoloads que la app carga de verdad. Editar aquí y acordarse de llevarlo allí es cómo el texto y
+el código se separan sin que nadie lo vea.
+
+Editar la fuente, **subir su `Effective Date`** (y la constante `Privacy.EFFECTIVE_DATE`, que un
+test exige que sean el mismo día), y desplegar:
 
 ```bash
+cp ../../senku/docs/privacy-policy.html index.html
 git add index.html && git commit -m "Update privacy policy" && git push
 ```
 
@@ -35,5 +42,6 @@ Este texto declara anuncios de AdMob y analítica de Firebase. **Si el juego se 
 las dos, la política sobredeclara** y hay que quitar esa sección. Y al revés es peor: añadir una
 librería que recoja datos sin actualizar esto es lo que hace que Play retire una app.
 
-El sitio de verificarlo es la fase de política del `PLAN.md` del juego, que cruza las secciones de
-aquí con los autoloads que el juego tiene cableados de verdad.
+Quien lo verifica es `senku/tests/test_politica_privacidad.gd`, que cruza los `<h2>` de este texto
+con el bloque `[autoload]` del `project.godot` del juego **en las dos direcciones**: una sección
+sin autoload detrás y un autoload sin sección delante ponen la suite en rojo.
